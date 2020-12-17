@@ -7,6 +7,12 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema mydb
 -- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `mydb` ;
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
 -- -----------------------------------------------------
 -- Schema projet
 -- -----------------------------------------------------
@@ -16,6 +22,17 @@ DROP SCHEMA IF EXISTS `projet` ;
 -- Schema projet
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `projet` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+USE `mydb` ;
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Conversation`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`Conversation` (
+  `idConversation` INT NOT NULL AUTO_INCREMENT,
+  `Conversation` VARCHAR(45) NULL,
+  PRIMARY KEY (`idConversation`))
+ENGINE = InnoDB;
+
 USE `projet` ;
 
 -- -----------------------------------------------------
@@ -89,6 +106,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `projet`.`Video` (
   `idVideo` INT NOT NULL,
+  `Videocol` VARCHAR(45) NULL,
   PRIMARY KEY (`idVideo`),
   CONSTRAINT `idAssetV`
     FOREIGN KEY (`idVideo`)
@@ -107,6 +125,9 @@ CREATE TABLE IF NOT EXISTS `projet`.`Message` (
   `idEmetteur` INT NOT NULL,
   `idRecepteur` INT NOT NULL,
   `Contenu` VARCHAR(45) NULL,
+  `dateEnvoi` DATETIME NULL,
+  `Messagecol` VARCHAR(45) NULL,
+  `Messagecol1` VARCHAR(45) NULL,
   PRIMARY KEY (`idEmetteur`, `idRecepteur`),
   INDEX `fk_uitlisateurs_has_uitlisateurs_uitlisateurs2_idx` (`idRecepteur` ASC) VISIBLE,
   INDEX `fk_uitlisateurs_has_uitlisateurs_uitlisateurs1_idx` (`idEmetteur` ASC) VISIBLE,
@@ -126,9 +147,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `projet`.`Appartenir`
+-- Table `projet`.`Membre`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `projet`.`Appartenir` (
+CREATE TABLE IF NOT EXISTS `projet`.`Membre` (
   `User_idUser` INT NOT NULL,
   `Groupe_idGroupe` INT NOT NULL,
   PRIMARY KEY (`User_idUser`, `Groupe_idGroupe`),
