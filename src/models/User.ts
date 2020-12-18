@@ -7,9 +7,7 @@ export default class User{
         this.idUser = id;
         this.nom = (name === undefined) ? null : name;
         this.prenom = (firstname === undefined) ? null : firstname;
-    }
-
+    }  
     
-
-
+    
 }
